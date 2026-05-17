@@ -1,0 +1,35 @@
+model_name: unsloth/Qwen2.5-7B-Instruct-bnb-4bit
+max_seq_length: 2048
+output_dir: ./toolcall-output
+hf_repo: YOUR_HF_USERNAME/krishna-toolcall-7b
+
+dataset:
+  name: glaiveai/glaive-function-calling-v2
+  split: train
+  sample_size: 10000
+  seed: 42
+
+lora:
+  r: 16
+  alpha: 16
+  dropout: 0
+  random_state: 3407
+
+training:
+  per_device_train_batch_size: 4
+  gradient_accumulation_steps: 4
+  warmup_steps: 10
+  max_steps: 500
+  learning_rate: 0.0002
+  weight_decay: 0.01
+  lr_scheduler_type: linear
+  logging_steps: 10
+  optim: adamw_8bit
+  seed: 3407
+  packing: true
+  bf16: auto
+
+hub:
+  push_merged: true
+  push_gguf: true
+  gguf_quantization: q4_k_m

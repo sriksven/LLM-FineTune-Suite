@@ -1,0 +1,11 @@
+unsloth
+torch
+datasets
+trl
+transformers
+accelerate
+peft
+bitsandbytes
+huggingface_hub[cli]
+pyyaml
+ipykernel

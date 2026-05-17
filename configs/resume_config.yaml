@@ -1,0 +1,32 @@
+model_name: unsloth/Qwen2.5-7B-Instruct-bnb-4bit
+max_seq_length: 2048
+output_dir: ./resume-output
+hf_repo: YOUR_HF_USERNAME/krishna-resumatch-7b
+dataset_path: data/resume_dataset.jsonl
+
+lora:
+  r: 16
+  alpha: 16
+  dropout: 0
+  random_state: 3407
+
+training:
+  per_device_train_batch_size: 2
+  gradient_accumulation_steps: 4
+  warmup_steps: 10
+  min_steps: 300
+  max_steps: 500
+  steps_per_example: 5
+  learning_rate: 0.0001
+  weight_decay: 0.01
+  lr_scheduler_type: cosine
+  logging_steps: 10
+  optim: adamw_8bit
+  seed: 3407
+  packing: false
+  bf16: auto
+
+hub:
+  push_merged: true
+  push_gguf: true
+  gguf_quantization: q4_k_m
